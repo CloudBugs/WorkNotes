@@ -1,0 +1,36 @@
+Part 1: Configuring My "Base" PuTTY Session
+===========================================
+Before using MTPuTTY, I set up my primary PuTTY settings (the "mine" profile) to ensure consistent colors and logging.
+Open PuTTY and go to the Logging category (under Session).
+
+Enable Logging: I select All session output.
+Set Log Path: I click Browse and point it to a folder in my OneDrive so my logs are backed up. (/dir/&H-&D-&M-&T.txt)
+Set Conflict Rule: I select Always append to the end of it so I don't overwrite previous logs.
+Customize Appearance: I go to Window > Colours to set my foreground/background preferences (e.g., the red text I set up).
+
+Save the Profile: I go back to the Session category.
+I Type "mine" in the Saved Sessions box.
+I Click Save.
+
+Part 2: Setting up MTPuTTY (Multi-Tabbed PuTTY)
+===============================================
+MTPuTTY acts as a "wrapper" to manage multiple PuTTY tabs in one window.
+Link PuTTY: When I first open MTPuTTY, it asks for the putty.exe location. I click the three dots (...) and navigate to where PuTTY is installed on my VDI. (eg. C:\Program Files\PuTTy\Putty.exe)
+
+Add a New Server:
+I click on the Servers menu at the top.
+I select Add Server.
+
+Configure Server Properties:
+----------------------------
+Display Name: I give it a recognizable name (e.g., "AIX_Production" or "Linux_Test").
+Server Name: I enter the IP address or Hostname.
+PuTTY Session: This is the most important part—I select "mine" from the dropdown. This ensures the colors and OneDrive logging I set up in PuTTY are used here.
+Login Credentials (Optional): I can enter my username here if I want MTPuTTY to send it automatically, though leaving the password blank is more secure.
+Save: I click OK. My server will now appear in the sidebar on the left.
+
+Part 3: Quick Tips for Daily Use
+--------------------------------
+I Double-click the server name in the left panel of MTPuTTY to open a new tab.
+I Right-click a tab to rename it or duplicate the session.
+Default Settings: If I want every new session to have these colors/logs without selecting a profile, I load "mine" in PuTTY, click "Default Settings," and hit Save.
