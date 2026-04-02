@@ -1,0 +1,57 @@
+Guide: Accessing AWS EC2 Instances via PuTTY & MTPuTTY
+======================================================
+Prerequisites
+------------------------------------------------------
+PuTTY & PuTTYgen installed on your local machine.
+MTPuTTY installed (for tabbed management).
+An active AWS EC2 Instance with a Public IP.
+The Key Pair (.pem file) downloaded from the AWS Console.
+------------------------------------------------------
+Phase 1: Key Conversion (.pem to .ppk)
+------------------------------------------------------
+AWS provides keys in .pem format, but PuTTY requires .ppk.
+Open PuTTYgen.
+Click Load and navigate to your <your-key-name>.pem file.
+Note: You may need to change the file type filter in the explorer window to "All Files (.)" to see the .pem file.
+Once the message "Successfully imported foreign key" appears, click OK.
+Click Save private key.
+When asked if you want to save without a passphrase, click Yes (or add one for extra security).
+Save the file as <your-key-name>.ppk in a secure folder.
+------------------------------------------------------
+Phase 2: Configuring the PuTTY Session
+------------------------------------------------------
+Before using MTPuTTY, we must create a "Master Profile" in PuTTY.
+1. Basic Connection
+Host Name (or IP address): Enter the Public IP of your instance (e.g., 3.xx.xx.xx).
+Port: 22
+Connection type: SSH
+2. Authentication (The Key)
+In the left Category tree, expand Connection > SSH > Auth.
+Select Credentials.
+Under Private key file for authentication, click Browse and select your newly created .ppk file.
+3. Auto-Login (Optional but Recommended)
+Go to Connection > Data.
+In Auto-login username, type the default user for your Linux distribution:
+Ubuntu: ubuntu
+Amazon Linux / RHEL: ec2-user
+Debian: admin
+4. Save the Session
+Go back to the Session category (top of the list).
+Under Saved Sessions, type a descriptive name (e.g., AWS-Prod-Server-01).
+Click Save.
+------------------------------------------------------
+Phase 3: Organizing with MTPuTTY
+------------------------------------------------------
+MTPuTTY allows you to run multiple PuTTY sessions in tabs and "blast" commands to all of them at once.
+Open MTPuTTY.
+Importing: If your saved PuTTY sessions don't appear automatically, go to Servers > Import from PuTTY.
+Grouping: * Right-click Servers and select New Folder (e.g., "Ansible-Cluster").
+Drag and drop your servers into this folder.
+Connecting: Double-click the server name to open it in a new tab.
+------------------------------------------------------
+Troubleshooting Checklist
+------------------------------------------------------
+Timeout Error? Check your AWS Security Group. Ensure Inbound Rules allow Port 22 from your current Public IP.
+Permission Denied (publickey)? Ensure the username (e.g., ubuntu) matches the OS of the instance and that the correct .ppk file is linked.
+Sudo Issues? If you need to run admin commands without a password once logged in, remember to add your user to the sudoers file using sudo visudo.
+
